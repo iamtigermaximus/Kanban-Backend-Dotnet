@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Kanban_Dotnet_Backend.Data;
+using Kanban_Dotnet_Backend.DTOs.Project;
 using Kanban_Dotnet_Backend.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -42,11 +43,11 @@ namespace Kanban_Dotnet_Backend.Services.Impl
         return serviceResponse;
     }
 
-    public async Task<ServiceResponse<List<Project>>> GetAllProjects()
+    public async Task<ServiceResponse<List<GetProjectDTO>>> GetAllProjects()
     {
-        var serviceResponse = new ServiceResponse<List<Project>>();
+        var serviceResponse = new ServiceResponse<List<GetProjectDTO>>();
         var dbProjects = await _context.Projects.ToListAsync();
-        serviceResponse.Data = dbProjects.Select(c => _mapper.Map<Project>(c)).ToList();
+        serviceResponse.Data = dbProjects.Select(c => _mapper.Map<GetProjectDTO>(c)).ToList();
         return serviceResponse;
     }
 

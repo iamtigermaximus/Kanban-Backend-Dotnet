@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Kanban_Dotnet_Backend.DTOs.Project;
 using Kanban_Dotnet_Backend.Models;
 using Kanban_Dotnet_Backend.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -22,7 +23,7 @@ public class ProjectController : ControllerBase
   }
 
   [HttpGet()]
-  public async Task<ActionResult<ServiceResponse<List<Project>>>> GetAll()
+  public async Task<ActionResult<ServiceResponse<List<GetProjectDTO>>>> GetAll()
   {
     var projects = await _projectService.GetAllProjects();
     return Ok(projects.Data);
