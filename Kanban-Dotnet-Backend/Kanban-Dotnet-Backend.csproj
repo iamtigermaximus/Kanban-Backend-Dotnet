@@ -25,10 +25,12 @@
     <None Remove="Controllers\" />
     <None Remove="DTOs\Card\" />
     <None Remove="DTOs\ProjectTask\" />
+    <None Remove="DTOs\Subtask\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controllers\" />
     <Folder Include="DTOs\Card\" />
     <Folder Include="DTOs\ProjectTask\" />
+    <Folder Include="DTOs\Subtask\" />
   </ItemGroup>
 </Project>
