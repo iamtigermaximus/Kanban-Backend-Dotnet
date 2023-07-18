@@ -6,6 +6,7 @@ using AutoMapper;
 using Kanban_Dotnet_Backend.DTOs.Project;
 using Kanban_Dotnet_Backend.DTOs.Category;
 using Kanban_Dotnet_Backend.Models;
+using Kanban_Dotnet_Backend.DTOs.Card;
 
 namespace Kanban_Dotnet_Backend;
 
@@ -20,5 +21,9 @@ public class AutoMapperProfile : Profile
         CreateMap<Category, CategoryReqDTO>();
         CreateMap<CategoryReqDTO, Category>();
         CreateMap<Category, CategoryResDTO>();
+
+        CreateMap<Card, CardReqDTO>();
+        CreateMap<CardReqDTO, Card>();
+        CreateMap<Card, CardResDTO>();
     }
 }

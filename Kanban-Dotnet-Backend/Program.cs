@@ -9,7 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
 builder.Services.AddScoped<IProjectService, ProjectService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
-//builder.Services.AddScoped<ICardService, CardService>();
+builder.Services.AddScoped<ICardService, CardService>();
 //builder.Services.AddScoped<IProjectTaskService, ProjectTaskService>();
 //builder.Services.AddScoped<ISubtaskService, SubtaskService>();
 
