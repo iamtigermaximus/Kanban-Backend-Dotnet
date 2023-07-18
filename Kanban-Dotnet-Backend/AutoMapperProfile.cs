@@ -12,6 +12,8 @@ public class AutoMapperProfile : Profile
 {
     public AutoMapperProfile()
     {
-        CreateMap<Project, GetProjectDTO>();
+        CreateMap<Project, ProjectReqDTO>();
+        CreateMap<ProjectReqDTO, Project>();
+        CreateMap<Project, ProjectResDTO>();
     }
 }

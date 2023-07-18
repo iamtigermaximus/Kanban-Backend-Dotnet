@@ -9,9 +9,9 @@ namespace Kanban_Dotnet_Backend.Services;
 
 public interface IProjectService
 {
-    Task<ServiceResponse<List<GetProjectDTO>>> GetAllProjects();
-    Task<ServiceResponse<Project>> GetById(int id);
-    Task<ServiceResponse<List<Project>>> Create(Project entity);
-    Task<ServiceResponse<Project>> Update( Project updatedProject);
-    Task<ServiceResponse<List<Project>>> Delete(int id);
+    Task<ServiceResponse<List<ProjectResDTO>>> GetAllProjects();
+    Task<ServiceResponse<ProjectResDTO>> GetById(int id);
+    Task<ServiceResponse<List<ProjectResDTO>>> Create(ProjectReqDTO entity);
+    Task<ServiceResponse<ProjectResDTO>> Update( ProjectReqDTO updatedProject);
+    Task<ServiceResponse<List<ProjectResDTO>>> Delete(int id);
 }

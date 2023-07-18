@@ -23,26 +23,26 @@ public class ProjectController : ControllerBase
   }
 
   [HttpGet()]
-  public async Task<ActionResult<ServiceResponse<List<GetProjectDTO>>>> GetAll()
+  public async Task<ActionResult<ServiceResponse<List<ProjectResDTO>>>> GetAll()
   {
     var projects = await _projectService.GetAllProjects();
     return Ok(projects.Data);
   }
 
   [HttpGet("{id}")]
-  public async Task<ActionResult<ServiceResponse<List<Project>>>> GetSingle(int id)
+  public async Task<ActionResult<ServiceResponse<List<ProjectResDTO>>>> GetSingle(int id)
   {
     return Ok(await _projectService.GetById(id));
   }
 
   [HttpPost()]
-  public async Task<ActionResult<ServiceResponse<List<Project>>>> AddProject(Project newProject)
+  public async Task<ActionResult<ServiceResponse<List<ProjectResDTO>>>> AddProject(ProjectReqDTO newProject)
   {
     return Ok(await _projectService.Create(newProject));
   }
 
 [HttpPut("{id}")]
-public async Task<IActionResult> UpdateProject(int id, Project updatedProject)
+public async Task<ActionResult<ServiceResponse<ProjectResDTO>>> UpdateProject(int id, ProjectReqDTO updatedProject)
 {
     var response = await _projectService.Update(updatedProject);
 
@@ -55,7 +55,7 @@ public async Task<IActionResult> UpdateProject(int id, Project updatedProject)
 }
 
   [HttpDelete("{id}")]
-  public async Task<ActionResult<ServiceResponse<Project>>> Delete(int id)
+  public async Task<ActionResult<ServiceResponse<ProjectResDTO>>> Delete(int id)
   {
      var response = await _projectService.Delete(id);
      if (response.Data is null)

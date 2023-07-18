@@ -21,9 +21,9 @@ namespace Kanban_Dotnet_Backend.Services.Impl
         _context = context;
     }
 
-    public async Task<ServiceResponse<List<Project>>> Create(Project newProject)
+    public async Task<ServiceResponse<List<ProjectResDTO>>> Create(ProjectReqDTO newProject)
     {
-        var serviceResponse = new ServiceResponse<List<Project>>();
+        var serviceResponse = new ServiceResponse<List<ProjectResDTO>>();
         try
         {
             var project = _mapper.Map<Project>(newProject);
@@ -32,7 +32,7 @@ namespace Kanban_Dotnet_Backend.Services.Impl
             await _context.SaveChangesAsync();
 
             serviceResponse.Data = await _context.Projects
-                    .Select(c => _mapper.Map<Project>(c))
+                    .Select(c => _mapper.Map<ProjectResDTO>(c))
                     .ToListAsync();
         }
         catch (Exception ex)
@@ -43,22 +43,23 @@ namespace Kanban_Dotnet_Backend.Services.Impl
         return serviceResponse;
     }
 
-    public async Task<ServiceResponse<List<GetProjectDTO>>> GetAllProjects()
+    public async Task<ServiceResponse<List<ProjectResDTO>>> GetAllProjects()
     {
-        var serviceResponse = new ServiceResponse<List<GetProjectDTO>>();
+        var serviceResponse = new ServiceResponse<List<ProjectResDTO>>();
         var dbProjects = await _context.Projects.ToListAsync();
-        serviceResponse.Data = dbProjects.Select(c => _mapper.Map<GetProjectDTO>(c)).ToList();
+        serviceResponse.Data = dbProjects.Select(c => _mapper.Map<ProjectResDTO>(c)).ToList();
         return serviceResponse;
     }
 
-    public async Task<ServiceResponse<Project>> GetById(int id)
+
+    public async Task<ServiceResponse<ProjectResDTO>> GetById(int id)
     {
-        var serviceResponse = new ServiceResponse<Project>();
+        var serviceResponse = new ServiceResponse<ProjectResDTO>();
         try
         {
             var dbProjects = await _context.Projects
             .FirstOrDefaultAsync(c => c.Id == id);
-            serviceResponse.Data = _mapper.Map<Project>(dbProjects);
+            serviceResponse.Data = _mapper.Map<ProjectResDTO>(dbProjects);
         }
         catch (Exception ex)
         {
@@ -68,9 +69,9 @@ namespace Kanban_Dotnet_Backend.Services.Impl
         return serviceResponse;
     }
 
-    public async Task<ServiceResponse<Project>> Update( Project updatedProject)
+    public async Task<ServiceResponse<ProjectResDTO>> Update(ProjectReqDTO updatedProject)
     {
-        var serviceResponse = new ServiceResponse<Project>();
+        var serviceResponse = new ServiceResponse<ProjectResDTO>();
 
         try
         {
@@ -81,7 +82,7 @@ namespace Kanban_Dotnet_Backend.Services.Impl
             project.Name = updatedProject.Name;
 
             await _context.SaveChangesAsync();
-            serviceResponse.Data = _mapper.Map<Project>(project);
+            serviceResponse.Data = _mapper.Map<ProjectResDTO>(project);
         }
         catch (Exception ex)
         {
@@ -93,9 +94,9 @@ namespace Kanban_Dotnet_Backend.Services.Impl
 
     }
 
-  public async Task<ServiceResponse<List<Project>>> Delete(int id)
+  public async Task<ServiceResponse<List<ProjectResDTO>>> Delete(int id)
     {
-        var serviceResponse = new ServiceResponse<List<Project>>();
+        var serviceResponse = new ServiceResponse<List<ProjectResDTO>>();
 
         try
         {
@@ -107,7 +108,7 @@ namespace Kanban_Dotnet_Backend.Services.Impl
 
             await _context.SaveChangesAsync();
 
-            serviceResponse.Data = await _context.Projects.Select(p => _mapper.Map<Project>(p)).ToListAsync();
+            serviceResponse.Data = await _context.Projects.Select(p => _mapper.Map<ProjectResDTO>(p)).ToListAsync();
 
         }
         catch (Exception ex)
