@@ -1,6 +1,20 @@
-﻿var builder = WebApplication.CreateBuilder(args);
+﻿using Kanban_Dotnet_Backend.Data;
+using Microsoft.EntityFrameworkCore;
+
+var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddAutoMapper(typeof(Program).Assembly);
+//builder.Services.AddScoped<IProjectService, ProjectService>();
+//builder.Services.AddScoped<ICategoryService, CategoryService>();
+//builder.Services.AddScoped<ICardService, CardService>();
+//builder.Services.AddScoped<IProjectTaskService, ProjectTaskService>();
+//builder.Services.AddScoped<ISubtaskService, SubtaskService>();
+
+//Register DataContext
+builder.Services.AddDbContext<DataContext>(options =>
+    options.UseNpgsql(builder.Configuration.GetConnectionString("KanbanDatabase"))
+);
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
