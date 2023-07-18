@@ -13,7 +13,7 @@ using Microsoft.Extensions.Logging;
 namespace Kanban_Dotnet_Backend.Controllers;
 
 [ApiController]
-[Route("api/v1/Projects")]
+[Route("api/v1/Categories")]
 public class CategoryController : ControllerBase
 {
     private readonly ICategoryService _categoryService;
