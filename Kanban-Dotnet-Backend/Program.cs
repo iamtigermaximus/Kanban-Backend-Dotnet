@@ -1,11 +1,13 @@
 ﻿using Kanban_Dotnet_Backend.Data;
+using Kanban_Dotnet_Backend.Services;
+using Kanban_Dotnet_Backend.Services.Impl;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
-//builder.Services.AddScoped<IProjectService, ProjectService>();
+builder.Services.AddScoped<IProjectService, ProjectService>();
 //builder.Services.AddScoped<ICategoryService, CategoryService>();
 //builder.Services.AddScoped<ICardService, CardService>();
 //builder.Services.AddScoped<IProjectTaskService, ProjectTaskService>();
