@@ -47,7 +47,10 @@ public async Task<ServiceResponse<List<CategoryResDTO>>> Create(CategoryReqDTO n
 public async Task<ServiceResponse<List<CategoryResDTO>>> GetAll()
 {
     var serviceResponse = new ServiceResponse<List<CategoryResDTO>>();
-    var dbCategories = await _context.Categories.ToListAsync();
+    var dbCategories = await _context.Categories
+            .Include(c => c.Project)
+            .ToListAsync();
+
     serviceResponse.Data = dbCategories.Select(c => _mapper.Map<CategoryResDTO>(c)).ToList();
     return serviceResponse;
 }
@@ -59,6 +62,7 @@ public async Task<ServiceResponse<CategoryResDTO>> GetById(int id)
     try
     {
         var dbCategories = await _context.Categories
+        .Include(c => c.Project)
         .FirstOrDefaultAsync(c => c.Id == id);
         serviceResponse.Data = _mapper.Map<CategoryResDTO>(dbCategories);
     }

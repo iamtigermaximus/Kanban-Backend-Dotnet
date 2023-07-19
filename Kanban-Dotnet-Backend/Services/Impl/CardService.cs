@@ -49,7 +49,10 @@ public class CardService: ICardService
     public async Task<ServiceResponse<List<CardResDTO>>> GetAll()
     {
         var serviceResponse = new ServiceResponse<List<CardResDTO>>();
-        var dbCards = await _context.Cards.ToListAsync();
+        var dbCards = await _context.Cards
+            .Include(c => c.Category)
+            .ToListAsync();
+
         serviceResponse.Data = dbCards.Select(c => _mapper.Map<CardResDTO>(c)).ToList();
         return serviceResponse;
     }
@@ -61,7 +64,9 @@ public class CardService: ICardService
         try
         {
             var dbCards = await _context.Cards
-            .FirstOrDefaultAsync(c => c.Id == id);
+                .Include(c => c.Category)
+                .FirstOrDefaultAsync(c => c.Id == id);
+
             serviceResponse.Data = _mapper.Map<CardResDTO>(dbCards);
         }
         catch (Exception ex)

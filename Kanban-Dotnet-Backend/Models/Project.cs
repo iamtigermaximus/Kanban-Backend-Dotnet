@@ -8,5 +8,5 @@ namespace Kanban_Dotnet_Backend.Models;
 public class Project : BaseModel
 {
     public string Name { get; set; }
-    public List<Category>? Data { get; set; }
+    public List<Category>? Categories { get; set; }
 }

@@ -46,7 +46,11 @@ public async Task<ServiceResponse<List<ProjectResDTO>>> Create(ProjectReqDTO new
 public async Task<ServiceResponse<List<ProjectResDTO>>> GetAllProjects()
 {
     var serviceResponse = new ServiceResponse<List<ProjectResDTO>>();
-    var dbProjects = await _context.Projects.ToListAsync();
+    var dbProjects = await _context.Projects
+            .Include(p => p.Categories)
+            .ThenInclude(c => c.Cards)
+            .ToListAsync();
+
     serviceResponse.Data = dbProjects.Select(c => _mapper.Map<ProjectResDTO>(c)).ToList();
     return serviceResponse;
 }
@@ -58,7 +62,10 @@ public async Task<ServiceResponse<ProjectResDTO>> GetById(int id)
     try
     {
         var dbProjects = await _context.Projects
+        .Include(p => p.Categories)
+        .ThenInclude(c => c.Cards)
         .FirstOrDefaultAsync(c => c.Id == id);
+
         serviceResponse.Data = _mapper.Map<ProjectResDTO>(dbProjects);
     }
     catch (Exception ex)

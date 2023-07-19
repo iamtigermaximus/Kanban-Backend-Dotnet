@@ -45,7 +45,9 @@ public class SubtaskService: ISubtaskService
     public async Task<ServiceResponse<List<SubtaskResDTO>>> GetAllSubtasks()
     {
         var serviceResponse = new ServiceResponse<List<SubtaskResDTO>>();
-        var dbSubtasks = await _context.Subtasks.ToListAsync();
+        var dbSubtasks = await _context.Subtasks
+            .Include(st => st.ProjectTask)
+            .ToListAsync();
         serviceResponse.Data = dbSubtasks.Select(s => _mapper.Map<SubtaskResDTO>(s)).ToList();
         return serviceResponse;
     }
@@ -84,7 +86,9 @@ public class SubtaskService: ISubtaskService
         try
         {
             var dbSubtask = await _context.Subtasks
-            .FirstOrDefaultAsync(s => s.Id == id);
+                .Include(st => st.ProjectTask)
+                .FirstOrDefaultAsync(s => s.Id == id);
+
             serviceResponse.Data = _mapper.Map<SubtaskResDTO>(dbSubtask);
         }
         catch (Exception ex)

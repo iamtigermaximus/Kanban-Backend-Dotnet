@@ -9,5 +9,7 @@ public class ProjectTask : BaseModel
 {
     public bool Completed { get; set; }
     public string Text { get; set; }
+    public int CardId { get; set; }
+    public Card Card { get; set; }
     public List<Subtask> Subtasks { get; set; }
 }

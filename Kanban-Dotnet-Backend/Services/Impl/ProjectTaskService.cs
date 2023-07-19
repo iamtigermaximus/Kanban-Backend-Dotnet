@@ -29,8 +29,9 @@ public class ProjectTaskService : IProjectTaskService
             await _context.SaveChangesAsync();
 
             serviceResponse.Data = await _context.ProjectTasks
-                    .Select(c => _mapper.Map<ProjectTaskResDTO>(c))
-                    .ToListAsync();
+                 .Include(pt => pt.Subtasks)
+                 .Select(pt => _mapper.Map<ProjectTaskResDTO>(pt))
+                 .ToListAsync();
         }
         catch (Exception ex)
         {
@@ -44,7 +45,10 @@ public class ProjectTaskService : IProjectTaskService
     public async Task<ServiceResponse<List<ProjectTaskResDTO>>> GetAllProjectTasks()
     {
         var serviceResponse = new ServiceResponse<List<ProjectTaskResDTO>>();
-        var dbProjectTasks = await _context.ProjectTasks.ToListAsync();
+        var dbProjectTasks = await _context.ProjectTasks
+            .Include(pt => pt.Subtasks)
+            .ToListAsync();
+
         serviceResponse.Data = dbProjectTasks.Select(p => _mapper.Map<ProjectTaskResDTO>(p)).ToList();
         return serviceResponse;
     }
@@ -82,7 +86,8 @@ public class ProjectTaskService : IProjectTaskService
         try
         {
             var dbProjectTasks = await _context.ProjectTasks
-            .FirstOrDefaultAsync(p => p.Id == id);
+                .Include(pt => pt.Card)
+                .FirstOrDefaultAsync(p => p.Id == id);
             serviceResponse.Data = _mapper.Map<ProjectTaskResDTO>(dbProjectTasks);
         }
         catch (Exception ex)
