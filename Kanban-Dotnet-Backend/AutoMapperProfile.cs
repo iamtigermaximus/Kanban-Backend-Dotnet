@@ -8,6 +8,7 @@ using Kanban_Dotnet_Backend.DTOs.Category;
 using Kanban_Dotnet_Backend.Models;
 using Kanban_Dotnet_Backend.DTOs.Card;
 using Kanban_Dotnet_Backend.DTOs.ProjectTask;
+using Kanban_Dotnet_Backend.DTOs.Subtask;
 
 namespace Kanban_Dotnet_Backend;
 
@@ -30,5 +31,9 @@ public class AutoMapperProfile : Profile
         CreateMap<ProjectTask, ProjectTaskReqDTO>();
         CreateMap<ProjectTaskReqDTO, ProjectTask>();
         CreateMap<ProjectTask, ProjectTaskResDTO>();
+
+        CreateMap<Subtask, SubtaskReqDTO>();
+        CreateMap<SubtaskReqDTO, Subtask>();
+        CreateMap<Subtask, SubtaskResDTO>();
     }
 }

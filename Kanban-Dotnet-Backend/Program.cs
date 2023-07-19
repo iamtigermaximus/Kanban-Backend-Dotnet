@@ -11,7 +11,7 @@ builder.Services.AddScoped<IProjectService, ProjectService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<ICardService, CardService>();
 builder.Services.AddScoped<IProjectTaskService, ProjectTaskService>();
-//builder.Services.AddScoped<ISubtaskService, SubtaskService>();
+builder.Services.AddScoped<ISubtaskService, SubtaskService>();
 
 //Register DataContext
 builder.Services.AddDbContext<DataContext>(options =>
