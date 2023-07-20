@@ -49,6 +49,7 @@ public async Task<ServiceResponse<List<CategoryResDTO>>> GetAll()
     var serviceResponse = new ServiceResponse<List<CategoryResDTO>>();
     var dbCategories = await _context.Categories
             .Include(c => c.Project)
+            .Include(c => c.Cards)
             .ToListAsync();
 
     serviceResponse.Data = dbCategories.Select(c => _mapper.Map<CategoryResDTO>(c)).ToList();
@@ -63,6 +64,7 @@ public async Task<ServiceResponse<CategoryResDTO>> GetById(int id)
     {
         var dbCategories = await _context.Categories
         .Include(c => c.Project)
+        .Include(c => c.Cards)
         .FirstOrDefaultAsync(c => c.Id == id);
         serviceResponse.Data = _mapper.Map<CategoryResDTO>(dbCategories);
     }

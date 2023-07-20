@@ -46,10 +46,12 @@ public async Task<ServiceResponse<List<ProjectResDTO>>> Create(ProjectReqDTO new
 public async Task<ServiceResponse<List<ProjectResDTO>>> GetAllProjects()
 {
     var serviceResponse = new ServiceResponse<List<ProjectResDTO>>();
-    var dbProjects = await _context.Projects
-            .Include(p => p.Categories)
+     var dbProjects = await _context.Projects
+        .Include(p => p.Categories)
             .ThenInclude(c => c.Cards)
-            .ToListAsync();
+                .ThenInclude(card => card.ProjectTasks)
+                    .ThenInclude(pt => pt.Subtasks)
+        .ToListAsync();
 
     serviceResponse.Data = dbProjects.Select(c => _mapper.Map<ProjectResDTO>(c)).ToList();
     return serviceResponse;
@@ -62,8 +64,10 @@ public async Task<ServiceResponse<ProjectResDTO>> GetById(int id)
     try
     {
         var dbProjects = await _context.Projects
-        .Include(p => p.Categories)
-        .ThenInclude(c => c.Cards)
+       .Include(p => p.Categories)
+            .ThenInclude(c => c.Cards)
+                .ThenInclude(card => card.ProjectTasks)
+                    .ThenInclude(pt => pt.Subtasks)
         .FirstOrDefaultAsync(c => c.Id == id);
 
         serviceResponse.Data = _mapper.Map<ProjectResDTO>(dbProjects);

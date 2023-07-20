@@ -51,6 +51,7 @@ public class CardService: ICardService
         var serviceResponse = new ServiceResponse<List<CardResDTO>>();
         var dbCards = await _context.Cards
             .Include(c => c.Category)
+            .Include(c => c.ProjectTasks)
             .ToListAsync();
 
         serviceResponse.Data = dbCards.Select(c => _mapper.Map<CardResDTO>(c)).ToList();
@@ -65,6 +66,7 @@ public class CardService: ICardService
         {
             var dbCards = await _context.Cards
                 .Include(c => c.Category)
+                .Include(c => c.ProjectTasks)
                 .FirstOrDefaultAsync(c => c.Id == id);
 
             serviceResponse.Data = _mapper.Map<CardResDTO>(dbCards);
