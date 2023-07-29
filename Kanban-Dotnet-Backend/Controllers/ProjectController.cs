@@ -44,7 +44,7 @@ public class ProjectController : ControllerBase
 [HttpPut("{id}")]
 public async Task<ActionResult<ServiceResponse<ProjectResDTO>>> UpdateProject(int id, ProjectReqDTO updatedProject)
 {
-    var response = await _projectService.Update(updatedProject);
+    var response = await _projectService.Update(id,updatedProject);
 
     if (!response.Success)
     {

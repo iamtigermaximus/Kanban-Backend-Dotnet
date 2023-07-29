@@ -13,7 +13,7 @@ namespace Kanban_Dotnet_Backend.Services
         Task<ServiceResponse<List<CardResDTO>>> GetAll();
         Task<ServiceResponse<CardResDTO>> GetById(int id);
         Task<ServiceResponse<List<CardResDTO>>> Create(CardReqDTO entity);
-        Task<ServiceResponse<CardResDTO>> Update(CardReqDTO updatedCard);
+        Task<ServiceResponse<CardResDTO>> Update(int id,CardReqDTO updatedCard);
         Task<ServiceResponse<List<CardResDTO>>> Delete(int id);
     }
 }

@@ -76,15 +76,15 @@ public async Task<ServiceResponse<CategoryResDTO>> GetById(int id)
     return serviceResponse;
 }
 
-public async Task<ServiceResponse<CategoryResDTO>> Update(CategoryReqDTO updatedCategory)
+public async Task<ServiceResponse<CategoryResDTO>> Update(int id,CategoryReqDTO updatedCategory)
 {
     var serviceResponse = new ServiceResponse<CategoryResDTO>();
 
     try
     {
-        var category = await _context.Categories.FirstOrDefaultAsync(c => c.Id == updatedCategory.Id);
+        var category = await _context.Categories.FirstOrDefaultAsync(c => c.Id == id);
         if (category is null)
-            throw new Exception($"Category with Id '{updatedCategory.Id}' not found.");
+            throw new Exception($"Category with Id '{id}' not found.");
 
             category.CategoryTitle = updatedCategory.CategoryTitle;
 

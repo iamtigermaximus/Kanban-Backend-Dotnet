@@ -79,15 +79,15 @@ public class CardService: ICardService
         return serviceResponse;
     }
 
-    public async Task<ServiceResponse<CardResDTO>> Update(CardReqDTO updatedCard)
+    public async Task<ServiceResponse<CardResDTO>> Update(int id,CardReqDTO updatedCard)
     {
         var serviceResponse = new ServiceResponse<CardResDTO>();
 
         try
         {
-            var card = await _context.Cards.FirstOrDefaultAsync(c => c.Id == updatedCard.Id);
+            var card = await _context.Cards.FirstOrDefaultAsync(c => c.Id == id);
             if (card is null)
-                throw new Exception($"Card with Id '{updatedCard.Id}' not found.");
+                throw new Exception($"Card with Id '{id}' not found.");
 
             card.Title = updatedCard.Title;
             card.Desc = updatedCard.Desc;

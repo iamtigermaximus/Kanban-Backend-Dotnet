@@ -80,15 +80,15 @@ public async Task<ServiceResponse<ProjectResDTO>> GetById(int id)
     return serviceResponse;
 }
 
-public async Task<ServiceResponse<ProjectResDTO>> Update(ProjectReqDTO updatedProject)
+public async Task<ServiceResponse<ProjectResDTO>> Update(int id,ProjectReqDTO updatedProject)
 {
     var serviceResponse = new ServiceResponse<ProjectResDTO>();
 
     try
     {
-        var project = await _context.Projects.FirstOrDefaultAsync(c => c.Id == updatedProject.Id);
+        var project = await _context.Projects.FirstOrDefaultAsync(c => c.Id == id);
         if (project is null)
-            throw new Exception($"Project with Id '{updatedProject.Id}' not found.");
+            throw new Exception($"Project with Id '{id}' not found.");
 
         project.Name = updatedProject.Name;
 

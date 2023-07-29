@@ -98,15 +98,15 @@ public class ProjectTaskService : IProjectTaskService
         return serviceResponse;
     }
 
-    public async Task<ServiceResponse<ProjectTaskResDTO>> Update(ProjectTaskReqDTO updatedProjectTask)
+    public async Task<ServiceResponse<ProjectTaskResDTO>> Update(int id,ProjectTaskReqDTO updatedProjectTask)
     {
         var serviceResponse = new ServiceResponse<ProjectTaskResDTO>();
 
         try
         {
-            var projectTask = await _context.ProjectTasks.FirstOrDefaultAsync(p => p.Id == updatedProjectTask.Id);
+            var projectTask = await _context.ProjectTasks.FirstOrDefaultAsync(p => p.Id == id);
             if (projectTask is null)
-                throw new Exception($"Project task with Id '{updatedProjectTask.Id}' not found.");
+                throw new Exception($"Project task with Id '{id}' not found.");
 
             projectTask.Text = updatedProjectTask.Text;
             projectTask.Completed = updatedProjectTask.Completed;

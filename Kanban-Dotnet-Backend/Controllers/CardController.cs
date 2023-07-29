@@ -45,7 +45,7 @@ public class CardController : ControllerBase
     [HttpPut("{id}")]
     public async Task<ActionResult<ServiceResponse<CardResDTO>>> UpdateCategory(int id, CardReqDTO updatedCard)
     {
-        var response = await _cardService.Update(updatedCard);
+        var response = await _cardService.Update(id,updatedCard);
 
         if (!response.Success)
         {

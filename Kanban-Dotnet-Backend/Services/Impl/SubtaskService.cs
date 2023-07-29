@@ -99,15 +99,15 @@ public class SubtaskService: ISubtaskService
         return serviceResponse;
     }
 
-    public async Task<ServiceResponse<SubtaskResDTO>> Update(SubtaskReqDTO updatedSubtask)
+    public async Task<ServiceResponse<SubtaskResDTO>> Update(int id,SubtaskReqDTO updatedSubtask)
     {
         var serviceResponse = new ServiceResponse<SubtaskResDTO>();
 
         try
         {
-            var subtask = await _context.Subtasks.FirstOrDefaultAsync(s => s.Id == updatedSubtask.Id);
+            var subtask = await _context.Subtasks.FirstOrDefaultAsync(s => s.Id == id);
             if (subtask is null)
-                throw new Exception($"Subtask  with Id '{updatedSubtask.Id}' not found.");
+                throw new Exception($"Subtask  with Id '{id}' not found.");
 
             subtask.Text = updatedSubtask.Text;
             subtask.Completed = updatedSubtask.Completed;

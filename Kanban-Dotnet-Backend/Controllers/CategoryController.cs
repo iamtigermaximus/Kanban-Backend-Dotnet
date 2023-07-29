@@ -45,7 +45,7 @@ public class CategoryController : ControllerBase
     [HttpPut("{id}")]
     public async Task<ActionResult<ServiceResponse<CategoryResDTO>>> UpdateCategory(int id, CategoryReqDTO updatedCategory)
     {
-        var response = await _categoryService.Update(updatedCategory);
+        var response = await _categoryService.Update(id,updatedCategory);
 
         if (!response.Success)
         {

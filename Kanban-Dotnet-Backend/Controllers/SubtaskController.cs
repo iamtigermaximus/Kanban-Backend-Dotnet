@@ -45,7 +45,7 @@ public class SubtaskController : ControllerBase
     [HttpPut("{id}")]
     public async Task<ActionResult<ServiceResponse<SubtaskResDTO>>> UpdateSubtask(int id, SubtaskReqDTO updatedSubtask)
     {
-        var response = await _subtaskService.Update(updatedSubtask);
+        var response = await _subtaskService.Update(id,updatedSubtask);
 
         if (!response.Success)
         {

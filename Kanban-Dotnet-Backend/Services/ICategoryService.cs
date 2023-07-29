@@ -12,7 +12,7 @@ namespace Kanban_Dotnet_Backend.Services
         Task<ServiceResponse<List<CategoryResDTO>>> GetAll();
         Task<ServiceResponse<CategoryResDTO>> GetById(int id);
         Task<ServiceResponse<List<CategoryResDTO>>> Create(CategoryReqDTO entity);
-        Task<ServiceResponse<CategoryResDTO>> Update( CategoryReqDTO updatedCategory);
+        Task<ServiceResponse<CategoryResDTO>> Update( int id,CategoryReqDTO updatedCategory);
         Task<ServiceResponse<List<CategoryResDTO>>> Delete(int id);
     }
 }

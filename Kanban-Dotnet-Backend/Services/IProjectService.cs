@@ -12,6 +12,6 @@ public interface IProjectService
     Task<ServiceResponse<List<ProjectResDTO>>> GetAllProjects();
     Task<ServiceResponse<ProjectResDTO>> GetById(int id);
     Task<ServiceResponse<List<ProjectResDTO>>> Create(ProjectReqDTO entity);
-    Task<ServiceResponse<ProjectResDTO>> Update( ProjectReqDTO updatedProject);
+    Task<ServiceResponse<ProjectResDTO>> Update( int id,ProjectReqDTO updatedProject);
     Task<ServiceResponse<List<ProjectResDTO>>> Delete(int id);
 }

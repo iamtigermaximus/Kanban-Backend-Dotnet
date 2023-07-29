@@ -10,7 +10,7 @@ public interface ISubtaskService
     Task<ServiceResponse<List<SubtaskResDTO>>> GetAllSubtasks();
     Task<ServiceResponse<SubtaskResDTO>> GetById(int id);
     Task<ServiceResponse<List<SubtaskResDTO>>> Create(SubtaskReqDTO newSubtask);
-    Task<ServiceResponse<SubtaskResDTO>> Update(SubtaskReqDTO updatedSubtask);
+    Task<ServiceResponse<SubtaskResDTO>> Update(int id,SubtaskReqDTO updatedSubtask);
     Task<ServiceResponse<List<SubtaskResDTO>>> Delete(int id);
 }
 
